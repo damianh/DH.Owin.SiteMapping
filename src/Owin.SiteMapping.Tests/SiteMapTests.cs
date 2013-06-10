@@ -1,4 +1,4 @@
-﻿namespace DH.Owin.SiteMapping.Tests
+﻿namespace Owin.SiteMapping
 {
     using System.Net;
     using System.Net.Http;
@@ -6,7 +6,6 @@
     using FluentAssertions;
     using Microsoft.Owin.Testing;
     using Xunit;
-    using global::Owin;
 
     public class SiteMapTests
     {

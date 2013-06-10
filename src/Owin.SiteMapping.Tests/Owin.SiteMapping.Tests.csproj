@@ -7,8 +7,8 @@
     <ProjectGuid>{2C2D78F6-27ED-4777-9E1A-476F9816E344}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DH.Owin.SiteMapping.Tests</RootNamespace>
-    <AssemblyName>DH.Owin.SiteMapping.Tests</AssemblyName>
+    <RootNamespace>Owin.SiteMapping</RootNamespace>
+    <AssemblyName>Owin.SiteMapping.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -75,7 +75,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DH.Owin.SiteMapping\DH.Owin.SiteMapping.csproj">
+    <ProjectReference Include="..\Owin.SiteMapping\Owin.SiteMapping.csproj">
       <Project>{757a5abf-f560-416d-8494-c7a2c6f8e1ef}</Project>
       <Name>DH.Owin.SiteMapping</Name>
     </ProjectReference>

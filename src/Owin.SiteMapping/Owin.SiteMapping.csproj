@@ -7,8 +7,8 @@
     <ProjectGuid>{757A5ABF-F560-416D-8494-C7A2C6F8E1EF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DH.Owin.SiteMapping</RootNamespace>
-    <AssemblyName>DH.Owin.SiteMapping</AssemblyName>
+    <RootNamespace>Owin.SiteMapping</RootNamespace>
+    <AssemblyName>Owin.SiteMapping</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>

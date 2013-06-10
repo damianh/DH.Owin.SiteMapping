@@ -1,4 +1,4 @@
-﻿namespace DH.Owin.SiteMapping
+﻿namespace Owin.SiteMapping
 {
     public enum RequestScheme
     {

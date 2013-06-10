@@ -1,18 +1,17 @@
-﻿namespace DH.Owin.SiteMapping
+﻿namespace Owin.SiteMapping
 {
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using global::Owin.Types;
-    using AppFunc = System.Func<System.Collections.Generic.IDictionary<string, object>, System.Threading.Tasks.Task>;
+    using Owin.Types;
 
     public class SiteMapMiddleware
     {
         private readonly Func<IDictionary<string, object>, Task> _nextApp;
-        private readonly AppFunc _branch;
+        private readonly Func<IDictionary<string, object>, Task> _branch;
         private readonly HashSet<SiteMap> _siteMaps;
 
-        public SiteMapMiddleware(AppFunc nextApp, AppFunc branch, IEnumerable<SiteMap> siteMaps)
+        public SiteMapMiddleware(Func<IDictionary<string, object>, Task> nextApp, Func<IDictionary<string, object>, Task> branch, IEnumerable<SiteMap> siteMaps)
         {
             if (nextApp == null)
             {

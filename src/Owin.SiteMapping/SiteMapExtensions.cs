@@ -1,12 +1,11 @@
 ﻿// ReSharper disable CheckNamespace
-namespace Owin
+namespace Owin.SiteMapping
 // ReSharper restore CheckNamespace
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using DH.Owin.SiteMapping;
-    using AppFunc = System.Func<System.Collections.Generic.IDictionary<string, object>, System.Threading.Tasks.Task>;
+    using System.Threading.Tasks;
 
     public static class SiteMapExtensions
     {
@@ -38,7 +37,7 @@ namespace Owin
 
             var branchBuilder = builder.New();
             branchBuilder.Use(new Func<TApp, TApp>(_ => branchApp));
-            return builder.UseType<SiteMapMiddleware>(branchBuilder.Build(typeof(AppFunc)), siteMaps);
+            return builder.UseType<SiteMapMiddleware>(branchBuilder.Build(typeof(Func<IDictionary<string, object>, Task>)), siteMaps);
         }
 
         public static IAppBuilder UseSiteMap(this IAppBuilder builder, SiteMap siteMap, Action<IAppBuilder> branchConfig)
@@ -67,7 +66,7 @@ namespace Owin
 
             var branchBuilder = builder.New();
             branchConfig(branchBuilder);
-            return builder.UseType<SiteMapMiddleware>(branchBuilder.Build(typeof(AppFunc)), siteMaps);
+            return builder.UseType<SiteMapMiddleware>(branchBuilder.Build(typeof(Func<IDictionary<string, object>, Task>)), siteMaps);
         }
     }
 }
