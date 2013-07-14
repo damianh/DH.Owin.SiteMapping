@@ -4,26 +4,30 @@
     using System.Net.Http;
     using System.Threading.Tasks;
     using FluentAssertions;
-    using Microsoft.Owin.Testing;
+    using Owin.Testing;
     using Xunit;
 
     public class SiteMapTests
     {
-        private readonly TestServer _testServer;
+        private readonly OwinTestServer _testServer;
 
         public SiteMapTests()
         {
-            _testServer = TestServer.Create(builder => builder.UseSiteMap(new SiteMap("localhost"), branch => branch.UseHandler((request, response) =>
+            _testServer = OwinTestServer.Create(
+                builder => builder.UseSiteMap(new SiteMap("localhost"),
+                branch => branch.Use(context =>
                 {
-                    response.StatusCode = 200;
-                    response.ReasonPhrase = "OK";
+                    context.Response.StatusCode = 200;
+                    context.Response.ReasonPhrase = "OK";
+                    return Task.FromResult(0);
                 })));
         }
 
         [Fact]
         public async Task Blah()
         {
-            HttpResponseMessage response = await _testServer.HttpClient.GetAsync("http://localhost");
+            HttpClient httpClient = _testServer.CreateHttpClient();
+            HttpResponseMessage response = await httpClient.GetAsync("http://localhost");
             response.StatusCode.Should().Be(HttpStatusCode.OK);
         }
     }
