@@ -4,7 +4,8 @@
     using System.Net.Http;
     using System.Threading.Tasks;
     using FluentAssertions;
-    using Owin.Testing;
+    using Microsoft.Owin.Infrastructure;
+    using Testing;
     using Xunit;
 
     public class SiteMapTests
@@ -14,20 +15,32 @@
         public SiteMapTests()
         {
             _testServer = OwinTestServer.Create(
-                builder => builder.UseSiteMap(new SiteMap("localhost"),
-                branch => branch.Use(context =>
+                builder =>
                 {
-                    context.Response.StatusCode = 200;
-                    context.Response.ReasonPhrase = "OK";
-                    return Task.FromResult(0);
-                })));
+                    SignatureConversions.AddConversions(builder); // supports Microsoft.Owin.OwinMiddleWare
+                    builder.UseSiteMap(new SiteMap("example.com"),
+                        branch => branch.Use(context =>
+                        {
+                            context.Response.StatusCode = 200;
+                            context.Response.ReasonPhrase = "OK";
+                            return Task.FromResult(0);
+                        }));
+                });
         }
 
         [Fact]
-        public async Task Blah()
+        public async Task When_site_is_mapped_then_should_get_OK()
         {
             HttpClient httpClient = _testServer.CreateHttpClient();
-            HttpResponseMessage response = await httpClient.GetAsync("http://localhost");
+            HttpResponseMessage response = await httpClient.GetAsync("http://example.com");
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+        }
+
+        [Fact]
+        public async Task When_site_is_unknown_then_should_get_NotFound()
+        {
+            HttpClient httpClient = _testServer.CreateHttpClient();
+            HttpResponseMessage response = await httpClient.GetAsync("http://example.com");
             response.StatusCode.Should().Be(HttpStatusCode.OK);
         }
     }

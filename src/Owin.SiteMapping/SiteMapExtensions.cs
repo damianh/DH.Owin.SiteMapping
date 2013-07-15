@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using AppFunc = System.Func<System.Collections.Generic.IDictionary<string, object>, System.Threading.Tasks.Task>;
 
     public static class SiteMapExtensions
     {
@@ -35,7 +36,8 @@
 
             var branchBuilder = builder.New();
             branchBuilder.Use(new Func<TApp, TApp>(_ => branchApp));
-            return builder.Use<SiteMapMiddleware>(branchBuilder.Build(typeof(Func<IDictionary<string, object>, Task>)), siteMaps);
+            var appFunc = (AppFunc)branchBuilder.Build(typeof(AppFunc));
+            return builder.Use<SiteMapMiddleware>(appFunc, siteMaps);
         }
 
         public static IAppBuilder UseSiteMap(this IAppBuilder builder, SiteMap siteMap, Action<IAppBuilder> branchConfig)
@@ -64,7 +66,8 @@
 
             var branchBuilder = builder.New();
             branchConfig(branchBuilder);
-            return builder.Use<SiteMapMiddleware>(branchBuilder.Build(typeof(Func<IDictionary<string, object>, Task>)), siteMaps);
+            var appFunc = (AppFunc)branchBuilder.Build(typeof(AppFunc));
+            return builder.Use<SiteMapMiddleware>(appFunc, siteMaps);
         }
     }
 }

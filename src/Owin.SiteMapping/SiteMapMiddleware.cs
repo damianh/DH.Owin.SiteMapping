@@ -5,14 +5,18 @@
     using System.Threading.Tasks;
     using Microsoft.Owin;
 
-    public class SiteMapMiddleware : OwinMiddleware
+    public class SiteMapMiddleware
     {
+        private readonly Func<IDictionary<string, object>, Task> _next;
         private readonly Func<IDictionary<string, object>, Task> _branch;
         private readonly HashSet<SiteMap> _siteMaps;
 
-        public SiteMapMiddleware(OwinMiddleware next, Func<IDictionary<string, object>, Task> branch, IEnumerable<SiteMap> siteMaps)
-            : base(next)
+        public SiteMapMiddleware(Func<IDictionary<string, object>, Task> next, Func<IDictionary<string, object>, Task> branch, IEnumerable<SiteMap> siteMaps)
         {
+            if (next == null)
+            {
+                throw new ArgumentNullException("next");
+            }
             if (branch == null)
             {
                 throw new ArgumentNullException("branch");
@@ -22,21 +26,22 @@
                 throw new ArgumentNullException("siteMaps");
             }
 
+            _next = next;
             _branch = branch;
             _siteMaps = new HashSet<SiteMap>(siteMaps);
         }
 
-        public override Task Invoke(IOwinContext context)
+        public Task Invoke(IDictionary<string, object> environment)
         {
-            if (context == null)
+            if (environment == null)
             {
-                throw new ArgumentNullException("context");
+                throw new ArgumentNullException("environment");
             }
-
-            var requestScheme = (RequestScheme)Enum.Parse(typeof(RequestScheme), context.Request.Scheme, true);
-            var port = context.Request.LocalPort;
-            var siteMap = new SiteMap(context.Request.Host, requestScheme, port ?? 80);
-            return _siteMaps.Contains(siteMap) ? _branch(context.Environment) : Next.Invoke(context);
+            var request = new OwinRequest(environment);
+            var requestScheme = (RequestScheme)Enum.Parse(typeof(RequestScheme), request.Scheme, true);
+            var port = request.LocalPort;
+            var siteMap = new SiteMap(request.Host, requestScheme, port ?? 80);
+            return _siteMaps.Contains(siteMap) ? _branch(request.Environment) : _next(request.Environment);
         }
     }
 }
