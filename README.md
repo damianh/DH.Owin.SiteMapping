@@ -12,8 +12,8 @@ public class Startup
   public void Configuration(IAppBuilder builder)
   {
     builder
-      .UseSiteMap(new SiteMap("www.example.com"), branch => branch.Use(...))
-      .UseSiteMap(new SiteMap("admin.example.com"), branch => branch.Use(...));
+      .MapSite(new SiteMap("www.example.com"), branch => branch.Use(...))
+      .MapSite(new SiteMap("admin.example.com"), branch => branch.Use(...));
   }
 }
 ```
