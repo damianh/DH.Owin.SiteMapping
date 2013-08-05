@@ -1,8 +1,11 @@
-﻿namespace Owin.SiteMapping
+﻿// ReSharper disable CheckNamespace
+namespace Owin
+// ReSharper restore CheckNamespace
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using SiteMapping;
     using AppFunc = System.Func<System.Collections.Generic.IDictionary<string, object>, System.Threading.Tasks.Task>;
 
     public static class SiteMapExtensions
