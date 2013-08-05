@@ -2,13 +2,13 @@
 {
     using System;
 
-    public class SiteMap : IEquatable<SiteMap>
+    public class SiteMapConfig : IEquatable<SiteMapConfig>
     {
         private readonly string _hostName;
         private readonly int _port;
         private readonly RequestScheme _requestScheme;
 
-        public SiteMap(string hostName, RequestScheme requestScheme = RequestScheme.Http, int port = 80)
+        public SiteMapConfig(string hostName, RequestScheme requestScheme = RequestScheme.Http, int port = 80)
         {
             if (string.IsNullOrWhiteSpace(hostName))
             {
@@ -34,7 +34,7 @@
             get { return _requestScheme; }
         }
 
-        public bool Equals(SiteMap other)
+        public bool Equals(SiteMapConfig other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
@@ -45,7 +45,7 @@
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            return obj.GetType() == GetType() && Equals((SiteMap) obj);
+            return obj.GetType() == GetType() && Equals((SiteMapConfig) obj);
         }
 
         public override int GetHashCode()
@@ -59,12 +59,12 @@
             }
         }
 
-        public static bool operator ==(SiteMap left, SiteMap right)
+        public static bool operator ==(SiteMapConfig left, SiteMapConfig right)
         {
             return Equals(left, right);
         }
 
-        public static bool operator !=(SiteMap left, SiteMap right)
+        public static bool operator !=(SiteMapConfig left, SiteMapConfig right)
         {
             return !Equals(left, right);
         }

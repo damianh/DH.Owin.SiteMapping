@@ -3,18 +3,17 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
     using AppFunc = System.Func<System.Collections.Generic.IDictionary<string, object>, System.Threading.Tasks.Task>;
 
     public static class SiteMapExtensions
     {
-        public static IAppBuilder UseSiteMap<TApp>(this IAppBuilder builder, SiteMap siteMap, TApp branchApp)
+        public static IAppBuilder MapSite<TApp>(this IAppBuilder builder, SiteMapConfig siteMapConfig, TApp branchApp)
             where TApp : class
         {
-            return UseSiteMap(builder, new[] {siteMap}, branchApp);
+            return MapSite(builder, new[] {siteMapConfig}, branchApp);
         }
 
-        public static IAppBuilder UseSiteMap<TApp>(this IAppBuilder builder, IEnumerable<SiteMap> siteMaps, TApp branchApp)
+        public static IAppBuilder MapSite<TApp>(this IAppBuilder builder, IEnumerable<SiteMapConfig> siteMaps, TApp branchApp)
             where TApp : class
         {
             if (builder == null)
@@ -40,12 +39,12 @@
             return builder.Use<SiteMapMiddleware>(appFunc, siteMaps);
         }
 
-        public static IAppBuilder UseSiteMap(this IAppBuilder builder, SiteMap siteMap, Action<IAppBuilder> branchConfig)
+        public static IAppBuilder MapSite(this IAppBuilder builder, SiteMapConfig siteMapConfig, Action<IAppBuilder> branchConfig)
         {
-            return UseSiteMap(builder, new[] { siteMap }, branchConfig);
+            return MapSite(builder, new[] { siteMapConfig }, branchConfig);
         }
 
-        public static IAppBuilder UseSiteMap(this IAppBuilder builder, IEnumerable<SiteMap> siteMaps, Action<IAppBuilder> branchConfig)
+        public static IAppBuilder MapSite(this IAppBuilder builder, IEnumerable<SiteMapConfig> siteMaps, Action<IAppBuilder> branchConfig)
         {
             if (builder == null)
             {

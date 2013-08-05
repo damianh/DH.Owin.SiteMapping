@@ -18,7 +18,7 @@
                 builder =>
                 {
                     SignatureConversions.AddConversions(builder); // supports Microsoft.Owin.OwinMiddleWare
-                    builder.UseSiteMap(new SiteMap("example.com"),
+                    builder.MapSite(new SiteMapConfig("example.com"),
                         branch => branch.Use(context =>
                         {
                             context.Response.StatusCode = 200;

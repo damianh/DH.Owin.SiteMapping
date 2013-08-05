@@ -9,9 +9,9 @@
     {
         private readonly Func<IDictionary<string, object>, Task> _next;
         private readonly Func<IDictionary<string, object>, Task> _branch;
-        private readonly HashSet<SiteMap> _siteMaps;
+        private readonly HashSet<SiteMapConfig> _siteMaps;
 
-        public SiteMapMiddleware(Func<IDictionary<string, object>, Task> next, Func<IDictionary<string, object>, Task> branch, IEnumerable<SiteMap> siteMaps)
+        public SiteMapMiddleware(Func<IDictionary<string, object>, Task> next, Func<IDictionary<string, object>, Task> branch, IEnumerable<SiteMapConfig> siteMaps)
         {
             if (next == null)
             {
@@ -28,7 +28,7 @@
 
             _next = next;
             _branch = branch;
-            _siteMaps = new HashSet<SiteMap>(siteMaps);
+            _siteMaps = new HashSet<SiteMapConfig>(siteMaps);
         }
 
         public Task Invoke(IDictionary<string, object> environment)
@@ -40,7 +40,7 @@
             var request = new OwinRequest(environment);
             var requestScheme = (RequestScheme)Enum.Parse(typeof(RequestScheme), request.Scheme, true);
             var port = request.LocalPort;
-            var siteMap = new SiteMap(request.Host, requestScheme, port ?? 80);
+            var siteMap = new SiteMapConfig(request.Host, requestScheme, port ?? 80);
             return _siteMaps.Contains(siteMap) ? _branch(request.Environment) : _next(request.Environment);
         }
     }
