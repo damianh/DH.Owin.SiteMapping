@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
-        <id>Owin.Testing</id>
+        <id>Owin.SiteMapping</id>
         <version>0.0.0.0</version>
         <authors>Damian Hickey</authors>
         <owners>Damian Hickey</owners>
-        <projectUrl>https://github.com/damianh/Owin.Testing</projectUrl>
+        <projectUrl>https://github.com/damianh/Owin.SiteMapping</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <title>Owin.Testing</title>
-        <description>A library that allows you to in-memory test owin applications without any environmental dependencies such as WebServer, HttpListener etc</description>
-        <tags>owin, testing</tags>
+        <title>Owin.SiteMapping</title>
+        <description>OWIN Middleware that provides functionality similar to IIS Site Bindings allowing you to partion your OWIN application by host header and port number.</description>
+        <tags>owin, middleware</tags>
 		<frameworkAssemblies/>
         <dependencies>
             <dependency id="Owin" version="1.0"/>
