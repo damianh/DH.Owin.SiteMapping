@@ -18,7 +18,7 @@
                 builder =>
                 {
                     SignatureConversions.AddConversions(builder); // supports Microsoft.Owin.OwinMiddleWare
-                    builder.MapSite(new SiteMapConfig("example.com"),
+                    builder.MapSite(new SiteMapConfig("example.com:81"),
                         branch => branch.Use((context, _) =>
                         {
                             context.Response.StatusCode = 200;
@@ -32,7 +32,7 @@
         public async Task When_site_is_mapped_then_should_get_OK()
         {
             HttpClient httpClient = _testServer.HttpClient;
-            HttpResponseMessage response = await httpClient.GetAsync("http://example.com");
+            HttpResponseMessage response = await httpClient.GetAsync("http://example.com:81");
             response.StatusCode.Should().Be(HttpStatusCode.OK);
         }
 
@@ -40,8 +40,8 @@
         public async Task When_site_is_unknown_then_should_get_NotFound()
         {
             HttpClient httpClient = _testServer.HttpClient;
-            HttpResponseMessage response = await httpClient.GetAsync("http://example.com");
-            response.StatusCode.Should().Be(HttpStatusCode.OK);
+            HttpResponseMessage response = await httpClient.GetAsync("http://example.com:82");
+            response.StatusCode.Should().Be(HttpStatusCode.NotFound);
         }
     }
 }
