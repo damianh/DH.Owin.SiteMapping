@@ -22,7 +22,9 @@ public class Startup
 
 Licence : [MIT]
 
-Questions? [@randompunter]
+Pull requests gratefully accepted.
+
+Questions or suggestions? Create an issue or [@randompunter] on twitter.
 
   [nuget]: http://www.nuget.org/packages/Owin.SiteMapping/
   [MIT]: http://opensource.org/licenses/MIT
