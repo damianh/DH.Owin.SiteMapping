@@ -3,6 +3,8 @@ Owin.SiteMapping
 
 OWIN Middleware that provides functionality similar to IIS Site Bindings allowing you to partion your OWIN application by host header and port number.
 
+Install via [nuget].
+
 Using
 -
 
@@ -22,5 +24,6 @@ Licence : [MIT]
 
 Questions? [@randompunter]
 
+  [nuget]: http://www.nuget.org/packages/Owin.SiteMapping/
   [MIT]: http://opensource.org/licenses/MIT
   [@randompunter]: http://twitter.com/randompunter
