@@ -1,8 +1,12 @@
-﻿namespace Owin.SiteMapping
+﻿using System;
+
+namespace Owin.SiteMapping
 {
+    [Flags]
     public enum RequestScheme
     {
-        Http,
-        Https,
+        Http = 1,
+        Https = 2,
+        HttpsXForwardedProto = 4 + 2
     }
 }

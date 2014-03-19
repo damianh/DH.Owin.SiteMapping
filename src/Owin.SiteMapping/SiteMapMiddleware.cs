@@ -41,7 +41,11 @@
 				throw new ArgumentNullException("environment");
 			}
 			var request = new OwinRequest(environment);
-			var requestScheme = (RequestScheme) Enum.Parse(typeof (RequestScheme), request.Scheme, true);
+
+			//If the headers have a X-Forwarded-Proto header then the request has been mapped through a load balancer and the initial scheme is conatined in the header value.
+			var scheme = string.Equals(request.Headers["X-Forwarded-Proto"], "https", StringComparison.InvariantCultureIgnoreCase) ? "HttpsXForwardedProto" : request.Scheme;
+
+			var requestScheme = (RequestScheme)Enum.Parse(typeof(RequestScheme), scheme, true);
 			var siteMap = new SiteMapConfig(request.Host.Value, requestScheme);
 			return _siteMaps.Contains(siteMap) ? _branch(request.Environment) : _next(request.Environment);
 		}
