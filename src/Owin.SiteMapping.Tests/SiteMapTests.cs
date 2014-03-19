@@ -101,7 +101,7 @@
         }
 
         [Fact]
-        public async Task When_secure_site_is_mapped_on_https_with_header_then_should_get_Ok()
+        public async Task When_secure_site_is_mapped_on_https_with_x_forward_proto_header_then_should_get_Ok()
         {
             HttpClient httpClient = _testServer.HttpClient;
             httpClient.DefaultRequestHeaders.Add("X-Forwarded-Proto", "https");
@@ -110,7 +110,7 @@
         }
 
         [Fact]
-        public async Task When_secure_site_is_mapped_on_http_with_header_then_should_get_forbidden()
+        public async Task When_secure_site_is_mapped_on_http_with_x_forward_proto_header_then_should_get_forbidden()
         {
             HttpClient httpClient = _testServer.HttpClient;
             httpClient.DefaultRequestHeaders.Add("X-Forwarded-Proto", "http");
@@ -135,7 +135,7 @@
         }
 
         [Fact]
-        public async Task When_multisecure_site_is_mapped_on_https_with_header_then_should_get_Ok()
+        public async Task When_multisecure_site_is_mapped_on_https_with_x_forward_proto_header_then_should_get_Ok()
         {
             HttpClient httpClient = _testServer.HttpClient;
             httpClient.DefaultRequestHeaders.Add("X-Forwarded-Proto", "https");
@@ -144,7 +144,7 @@
         }
 
         [Fact]
-        public async Task When_multisecure_site_is_mapped_on_http_with_header_then_should_get_forbidden()
+        public async Task When_multisecure_site_is_mapped_on_http_with_x_forward_proto_header_then_should_get_forbidden()
         {
             HttpClient httpClient = _testServer.HttpClient;
             httpClient.DefaultRequestHeaders.Add("X-Forwarded-Proto", "http");
