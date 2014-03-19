@@ -4,7 +4,6 @@
     using System.Net.Http;
     using System.Threading.Tasks;
     using FluentAssertions;
-    using Microsoft.Owin.Infrastructure;
     using Microsoft.Owin.Testing;
     using Xunit;
 
@@ -17,7 +16,6 @@
             _testServer = TestServer.Create(
                 builder =>
                 {
-                    SignatureConversions.AddConversions(builder); // supports Microsoft.Owin.OwinMiddleWare
                     builder.MapSite(new SiteMapConfig("example.com:81"),
                         branch => branch.Use((context, _) =>
                                              {
