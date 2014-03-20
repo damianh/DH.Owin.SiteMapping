@@ -39,7 +39,7 @@ task RunTests -depends Compile {
 }
 
 task ILRepack -depends Compile {
-	$ilrepack = "$srcDir\packages\ILRepack.1.22.2\tools\ILRepack.exe"
+	$ilrepack = "$srcDir\packages\ILRepack.1.25.0\tools\ILRepack.exe"
 	$workingDir = "$srcDir\Owin.SiteMapping\bin\Release"
 	.$ilrepack /targetplatform:v4 /internalize /target:library /out:$workingDir\$projectName.dll $workingDir\$projectName.dll $workingDir\Microsoft.Owin.dll
 }
