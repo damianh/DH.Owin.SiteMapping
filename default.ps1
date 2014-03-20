@@ -51,7 +51,9 @@ task CopyBuildOutput -depends Compile {
 }
 
 task CreateNuGetPackages -depends CopyBuildOutput {
-	$packageVersion = Get-Version $assemblyInfoFilePath
+	$versionString = Get-Version $assemblyInfoFilePath
+	$version = New-Object Version $versionString
+	$packageVersion = $version.Major.ToString() + "." + $version.Minor.ToString() + "." + $version.Build.ToString()
 	copy-item $srcDir\$projectName\$projectName.nuspec $buildOutputDir
 	exec { .$srcDir\.nuget\nuget.exe pack $buildOutputDir\$projectName.nuspec -BasePath $buildOutputDir -o $buildOutputDir -version $packageVersion }
 }
