@@ -13,7 +13,7 @@
         public async Task When_site_is_mapped_then_should_get_OK()
         {
              var testServer = TestServer.Create(
-                builder => builder.MapSite(new SiteMapConfig("example.com:81"),
+                builder => builder.MapSite("example.com:81",
                     branch => branch.Use((context, _) =>
                     {
                         context.Response.StatusCode = 200;
@@ -32,7 +32,7 @@
         public async Task When_site_is_unknown_then_should_get_NotFound()
         {
             var testServer = TestServer.Create(
-                builder => builder.MapSite(new SiteMapConfig("example.com:81"),
+                builder => builder.MapSite("example.com:81",
                     branch => branch.Use((context, _) =>
                     {
                         context.Response.StatusCode = 200;
@@ -50,7 +50,7 @@
         public async Task When_secure_site_is_mapped_on_https_then_should_get_OK()
         {
             var testServer = TestServer.Create(
-                builder => builder.MapSite(new SiteMapConfig("secure.example.com", RequestScheme.Https),
+                builder => builder.MapSite("secure.example.com", RequestScheme.Https,
                     branch => branch.Use((context, _) =>
                     {
                         context.Response.StatusCode = 200;
@@ -68,7 +68,7 @@
         public async Task When_secure_site_is_mapped_on_http_then_should_get_forbidden()
         {
             var testServer = TestServer.Create(
-                builder => builder.MapSite(new SiteMapConfig("secure.example.com"),
+                builder => builder.MapSite("secure.example.com",
                     branch => branch.Use((context, _) =>
                     {
                         context.Response.StatusCode = 403;
@@ -86,7 +86,7 @@
         public async Task When_secure_site_is_mapped_on_https_with_x_forward_proto_header_then_should_get_Ok()
         {
             var testServer = TestServer.Create(
-                builder => builder.MapSite(new SiteMapConfig("secure.example.com", RequestScheme.HttpsXForwardedProto),
+                builder => builder.MapSite("secure.example.com", RequestScheme.HttpsXForwardedProto,
                     branch => branch.Use((context, _) =>
                     {
                         context.Response.StatusCode = 200;
@@ -105,7 +105,7 @@
         public async Task When_secure_site_is_mapped_on_http_with_x_forward_proto_header_then_should_get_forbidden()
         {
             var testServer = TestServer.Create(
-                builder => builder.MapSite(new SiteMapConfig("secure.example.com"),
+                builder => builder.MapSite("secure.example.com",
                     branch => branch.Use((context, _) =>
                     {
                         context.Response.StatusCode = 403;
@@ -124,7 +124,7 @@
         public async Task When_multisecure_site_is_mapped_on_https_then_should_get_OK()
         {
             var testServer = TestServer.Create(
-                builder => builder.MapSite(new SiteMapConfig("multisecure.example.com", RequestScheme.HttpsXForwardedProto | RequestScheme.Https),
+                builder => builder.MapSite("multisecure.example.com", RequestScheme.HttpsXForwardedProto | RequestScheme.Https,
                     branch => branch.Use((context, _) =>
                     {
                         context.Response.StatusCode = 200;
@@ -142,7 +142,7 @@
         public async Task When_multisecure_site_is_mapped_on_http_then_should_get_forbidden()
         {
             var testServer = TestServer.Create(
-                builder => builder.MapSite(new SiteMapConfig("multisecure.example.com"),
+                builder => builder.MapSite("multisecure.example.com",
                     branch => branch.Use((context, _) =>
                     {
                         context.Response.StatusCode = 403;
@@ -160,7 +160,7 @@
         public async Task When_multisecure_site_is_mapped_on_https_with_x_forward_proto_header_then_should_get_Ok()
         {
             var testServer = TestServer.Create(
-                builder => builder.MapSite(new SiteMapConfig("multisecure.example.com", RequestScheme.HttpsXForwardedProto | RequestScheme.Https),
+                builder => builder.MapSite("multisecure.example.com", RequestScheme.HttpsXForwardedProto | RequestScheme.Https,
                     branch => branch.Use((context, _) =>
                     {
                         context.Response.StatusCode = 200;
@@ -179,7 +179,7 @@
         public async Task When_multisecure_site_is_mapped_on_http_with_x_forward_proto_header_then_should_get_forbidden()
         {
             var testServer = TestServer.Create(
-                builder => builder.MapSite(new SiteMapConfig("multisecure.example.com"),
+                builder => builder.MapSite("multisecure.example.com",
                     branch => branch.Use((context, _) =>
                     {
                         context.Response.StatusCode = 403;

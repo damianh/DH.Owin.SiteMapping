@@ -47,6 +47,11 @@ namespace Owin
             return MapSite(builder, new SiteMapConfig(hostName), branchConfig);
         }
 
+        public static IAppBuilder MapSite(this IAppBuilder builder, string hostName, RequestScheme requestScheme, Action<IAppBuilder> branchConfig)
+        {
+            return MapSite(builder, new SiteMapConfig(hostName, requestScheme), branchConfig);
+        }
+
         public static IAppBuilder MapSite(this IAppBuilder builder, SiteMapConfig siteMapConfig, Action<IAppBuilder> branchConfig)
         {
             return MapSite(builder, new[] { siteMapConfig }, branchConfig);
