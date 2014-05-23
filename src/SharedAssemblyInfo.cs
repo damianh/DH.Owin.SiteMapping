@@ -3,7 +3,7 @@
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Damian Hickey")]
 [assembly: AssemblyProduct("Owin.SiteMapping")]
-[assembly: AssemblyCopyright("Copyright © Damian Hickey 2013")]
+[assembly: AssemblyCopyright("Copyright © Damian Hickey 2013-2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: AssemblyVersion("1.1.0.0")]
