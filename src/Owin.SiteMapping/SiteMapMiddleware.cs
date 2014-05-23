@@ -42,7 +42,8 @@
             }
             var request = new OwinRequest(environment);
 
-            //If the headers have a X-Forwarded-Proto header then the request has been mapped through a load balancer and the initial scheme is conatined in the header value.
+            //If the headers have a X-Forwarded-Proto header then the request has been mapped through
+            //a load balancer or reverse proxy and the initial scheme is contained in the header value.
             string scheme = string.Equals(request.Headers["X-Forwarded-Proto"], "https", StringComparison.InvariantCultureIgnoreCase)
                 ? "HttpsXForwardedProto"
                 : request.Scheme;
