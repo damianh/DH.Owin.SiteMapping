@@ -42,6 +42,11 @@ namespace Owin
             return builder.Use<SiteMapMiddleware>(appFunc, siteMaps);
         }
 
+        public static IAppBuilder MapSite(this IAppBuilder builder, string hostName, Action<IAppBuilder> branchConfig)
+        {
+            return MapSite(builder, new SiteMapConfig(hostName), branchConfig);
+        }
+
         public static IAppBuilder MapSite(this IAppBuilder builder, SiteMapConfig siteMapConfig, Action<IAppBuilder> branchConfig)
         {
             return MapSite(builder, new[] { siteMapConfig }, branchConfig);
