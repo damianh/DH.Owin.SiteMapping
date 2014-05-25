@@ -9,6 +9,8 @@
     using Microsoft.Owin.Testing;
     using Xunit;
 
+    using AppFunc = System.Func<System.Collections.Generic.IDictionary<string, object>, System.Threading.Tasks.Task>;
+
     public class SiteMapTests
     {
         private static AppFunc UseOwinContext(Action<IOwinContext> action)

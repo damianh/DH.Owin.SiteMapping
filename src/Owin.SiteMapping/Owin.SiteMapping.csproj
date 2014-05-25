@@ -51,7 +51,6 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Guard.cs" />
-    <Compile Include="OwinDelegates.cs" />
     <Compile Include="SiteMapMiddlewareExtensions.cs" />
     <Compile Include="RequestScheme.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
