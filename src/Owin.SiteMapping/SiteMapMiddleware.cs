@@ -2,55 +2,46 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Threading.Tasks;
     using Microsoft.Owin;
 
-    public class SiteMapMiddleware
+    /// <summary>
+    /// 
+    /// </summary>
+    public static class SiteMapMiddleware
     {
-        private readonly Func<IDictionary<string, object>, Task> _branch;
-        private readonly Func<IDictionary<string, object>, Task> _next;
-        private readonly HashSet<SiteMapConfig> _siteMaps;
-
-        public SiteMapMiddleware(
-            Func<IDictionary<string, object>, Task> next,
-            Func<IDictionary<string, object>, Task> branch,
-            IEnumerable<SiteMapConfig> siteMaps)
+        /// <summary>
+        /// Maps the site.
+        /// </summary>
+        /// <param name="siteMapConfigs">The site map configs.</param>
+        /// <param name="branch">The branch that is invoked when a request matches a site map config.</param>
+        /// <returns>A middleware func.</returns>
+        /// <exception cref="System.ArgumentNullException">siteMapConfigs</exception>
+        /// <exception cref="System.ArgumentNullException">branch</exception>
+        public static MidFunc MapSite(IEnumerable<SiteMapConfig> siteMapConfigs, AppFunc branch)
         {
-            if (next == null)
-            {
-                throw new ArgumentNullException("next");
-            }
-            if (branch == null)
-            {
-                throw new ArgumentNullException("branch");
-            }
-            if (siteMaps == null)
-            {
-                throw new ArgumentNullException("siteMaps");
-            }
+            siteMapConfigs.MustNotBeNull("siteMapConfigs");
+            branch.MustNotBeNull("branch");
+            var siteMapsHashSet = new HashSet<SiteMapConfig>(siteMapConfigs);
 
-            _next = next;
-            _branch = branch;
-            _siteMaps = new HashSet<SiteMapConfig>(siteMaps);
-        }
+            return
+                next =>
+                env =>
+                {
+                    var request = new OwinRequest(env);
 
-        public Task Invoke(IDictionary<string, object> environment)
-        {
-            if (environment == null)
-            {
-                throw new ArgumentNullException("environment");
-            }
-            var request = new OwinRequest(environment);
+                    //If the headers have a X-Forwarded-Proto header then the request has been mapped through
+                    //a load balancer or reverse proxy and the initial scheme is contained in the header value.
+                    string scheme = string.Equals(request.Headers["X-Forwarded-Proto"], "https",
+                        StringComparison.InvariantCultureIgnoreCase)
+                        ? "HttpsXForwardedProto"
+                        : request.Scheme;
 
-            //If the headers have a X-Forwarded-Proto header then the request has been mapped through
-            //a load balancer or reverse proxy and the initial scheme is contained in the header value.
-            string scheme = string.Equals(request.Headers["X-Forwarded-Proto"], "https", StringComparison.InvariantCultureIgnoreCase)
-                ? "HttpsXForwardedProto"
-                : request.Scheme;
-
-            var requestScheme = (RequestScheme)Enum.Parse(typeof(RequestScheme), scheme, true);
-            var siteMap = new SiteMapConfig(request.Host.Value, requestScheme);
-            return _siteMaps.Contains(siteMap) ? _branch(request.Environment) : _next(request.Environment);
+                    var requestScheme = (RequestScheme)Enum.Parse(typeof(RequestScheme), scheme, true);
+                    var siteMap = new SiteMapConfig(request.Host.Value, requestScheme);
+                    return siteMapsHashSet.Contains(siteMap)
+                        ? branch(request.Environment)
+                        : next(request.Environment);
+                };
         }
     }
 }

@@ -10,13 +10,10 @@
         <title>Owin.SiteMapping</title>
         <description>OWIN Middleware that provides functionality similar to IIS Site Bindings allowing you to partition your OWIN application by host header and port number.</description>
         <tags>owin, middleware</tags>
-		<frameworkAssemblies/>
-        <dependencies>
-            <dependency id="Owin" version="1.0"/>
-        </dependencies>
-		<releaseNotes>
-			Support for X-Forward-Proto https headers.
-		</releaseNotes>
+        <frameworkAssemblies/>
+        <releaseNotes>
+            Removal of dependency on Owin.dll
+        </releaseNotes>
     </metadata>
     <files>
         <file src="bin\Owin.SiteMapping\net40\Owin.SiteMapping.dll" target="lib\net40" />
