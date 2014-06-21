@@ -82,8 +82,7 @@
             hostname.MustNotBeNullOrWhitespace("hostname");
             branch.MustNotBeNull("branch");
 
-            builder(_ => MapSite(new[] { new SiteMapConfig(hostname) }, branch));
-            return builder;
+            return MapSite(builder, new[] {new SiteMapConfig(hostname)}, branch);
         }
 
         /// <summary>
@@ -103,8 +102,7 @@
             hostname.MustNotBeNullOrWhitespace("hostname");
             branch.MustNotBeNull("branch");
 
-            builder(_ => MapSite(new[] { new SiteMapConfig(hostname, requestScheme) }, branch));
-            return builder;
+            return MapSite(builder, new SiteMapConfig(hostname, requestScheme), branch);
         }
 
         /// <summary>
@@ -123,8 +121,7 @@
             siteMapConfig.MustNotBeNull("siteMapConfig");
             branch.MustNotBeNull("branch");
 
-            builder(_ => MapSite(new[] { siteMapConfig }, branch));
-            return builder;
+            return MapSite(builder, new[] {siteMapConfig}, branch);
         }
 
         /// <summary>
