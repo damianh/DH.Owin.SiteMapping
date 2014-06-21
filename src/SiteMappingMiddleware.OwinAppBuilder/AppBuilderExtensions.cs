@@ -81,7 +81,7 @@
 
             builder
                 .UseOwin()
-                .MapSite(new[] { new SiteMapConfig(hostname, requestScheme) }, branch);
+                .MapSite(hostname, requestScheme, branch);
             return builder;
         }
 
@@ -102,7 +102,7 @@
             hostname.MustNotBeNullOrWhitespace("hostname");
             branch.MustNotBeNull("branch");
 
-            return MapSite(builder, new[] { new SiteMapConfig(hostname, requestScheme) }, builder.BranchConfig(branch));
+            return MapSite(builder, hostname, requestScheme, builder.BranchConfig(branch));
         }
 
         /// <summary>
@@ -123,7 +123,7 @@
 
             builder
                .UseOwin()
-               .MapSite(new[] { siteMapConfig }, branch);
+               .MapSite(siteMapConfig, branch);
             return builder;
         }
 
@@ -143,7 +143,7 @@
             siteMapConfig.MustNotBeNull("siteMapConfig");
             branch.MustNotBeNull("branch");
 
-            return MapSite(builder, new[] { siteMapConfig }, builder.BranchConfig(branch));
+            return MapSite(builder, siteMapConfig, builder.BranchConfig(branch));
         }
 
         /// <summary>

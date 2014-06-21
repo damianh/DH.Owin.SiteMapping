@@ -7,7 +7,7 @@ namespace System
         {
             if (argument == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(name);
             }
         }
 
@@ -15,7 +15,7 @@ namespace System
         {
             if (string.IsNullOrWhiteSpace(argument))
             {
-                throw new ArgumentException("name");
+                throw new ArgumentException(name);
             }
         }
     }

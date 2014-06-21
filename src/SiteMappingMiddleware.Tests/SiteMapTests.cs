@@ -14,13 +14,12 @@
 
     public class SiteMapTests
     {
-        private static AppFunc UseOwinContext(Action<IOwinContext> action)
+        private static AppFunc UseOwinContext(Func<IOwinContext, Task> action)
         {
             return env =>
             {
                 var context = new OwinContext(env);
-                action(context);
-                return Task.FromResult(0);
+                return action(context);
             };
         }
 
@@ -32,6 +31,7 @@
                 {
                     context.Response.StatusCode = 200;
                     context.Response.ReasonPhrase = "OK";
+                    return Task.FromResult(0);
                 })));
 
             HttpClient httpClient = testServer.HttpClient;
@@ -49,6 +49,7 @@
                 {
                     context.Response.StatusCode = 200;
                     context.Response.ReasonPhrase = "OK";
+                    return Task.FromResult(0);
                 })));
             HttpClient httpClient = testServer.HttpClient;
 
