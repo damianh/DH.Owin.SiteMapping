@@ -61,13 +61,13 @@
         public async Task When_secure_site_is_mapped_on_https_then_should_get_OK()
         {
             var testServer = TestServer.Create(
-                builder => builder.MapSite("secure.example.com", RequestScheme.Https, builder.BranchConfig(
+                builder => builder.MapSite("secure.example.com", RequestScheme.Https,
                     branch => branch.Use((context, _) =>
                     {
                         context.Response.StatusCode = 200;
                         context.Response.ReasonPhrase = "OK";
                         return Task.FromResult(0);
-                    }))));
+                    })));
             HttpClient httpClient = testServer.HttpClient;
 
             HttpResponseMessage response = await httpClient.GetAsync("https://secure.example.com");
@@ -79,13 +79,13 @@
         public async Task When_secure_site_is_mapped_on_http_then_should_get_forbidden()
         {
             var testServer = TestServer.Create(
-                builder => builder.MapSite("secure.example.com", builder.BranchConfig(
+                builder => builder.MapSite("secure.example.com",
                     branch => branch.Use((context, _) =>
                     {
                         context.Response.StatusCode = 403;
                         context.Response.ReasonPhrase = "Forbidden";
                         return Task.FromResult(0);
-                    }))));
+                    })));
             HttpClient httpClient = testServer.HttpClient;
 
             HttpResponseMessage response = await httpClient.GetAsync("http://secure.example.com");
@@ -97,13 +97,13 @@
         public async Task When_secure_site_is_mapped_on_https_with_x_forward_proto_header_then_should_get_Ok()
         {
             var testServer = TestServer.Create(
-                builder => builder.MapSite("secure.example.com", RequestScheme.HttpsXForwardedProto, builder.BranchConfig(
+                builder => builder.MapSite("secure.example.com", RequestScheme.HttpsXForwardedProto,
                     branch => branch.Use((context, _) =>
                     {
                         context.Response.StatusCode = 200;
                         context.Response.ReasonPhrase = "OK";
                         return Task.FromResult(0);
-                    }))));
+                    })));
             HttpClient httpClient = testServer.HttpClient;
             httpClient.DefaultRequestHeaders.Add("X-Forwarded-Proto", "https");
 
@@ -116,13 +116,13 @@
         public async Task When_secure_site_is_mapped_on_http_with_x_forward_proto_header_then_should_get_forbidden()
         {
             var testServer = TestServer.Create(
-                builder => builder.MapSite("secure.example.com", builder.BranchConfig(
+                builder => builder.MapSite("secure.example.com",
                     branch => branch.Use((context, _) =>
                     {
                         context.Response.StatusCode = 403;
                         context.Response.ReasonPhrase = "Forbidden";
                         return Task.FromResult(0);
-                    }))));
+                    })));
             HttpClient httpClient = testServer.HttpClient;
             httpClient.DefaultRequestHeaders.Add("X-Forwarded-Proto", "http");
 
@@ -136,12 +136,12 @@
         {
             var testServer = TestServer.Create(
                 builder => builder.MapSite("multisecure.example.com", RequestScheme.HttpsXForwardedProto | RequestScheme.Https,
-                    builder.BranchConfig(branch => branch.Use((context, _) =>
+                    branch => branch.Use((context, _) =>
                     {
                         context.Response.StatusCode = 200;
                         context.Response.ReasonPhrase = "OK";
                         return Task.FromResult(0);
-                    }))));
+                    })));
             HttpClient httpClient = testServer.HttpClient;
 
             HttpResponseMessage response = await httpClient.GetAsync("https://multisecure.example.com");
@@ -153,13 +153,13 @@
         public async Task When_multisecure_site_is_mapped_on_http_then_should_get_forbidden()
         {
             var testServer = TestServer.Create(
-                builder => builder.MapSite("multisecure.example.com",builder.BranchConfig(
+                builder => builder.MapSite("multisecure.example.com",
                     branch => branch.Use((context, _) =>
                     {
                         context.Response.StatusCode = 403;
                         context.Response.ReasonPhrase = "Forbidden";
                         return Task.FromResult(0);
-                    }))));
+                    })));
             HttpClient httpClient = testServer.HttpClient;
 
             HttpResponseMessage response = await httpClient.GetAsync("http://multisecure.example.com");
@@ -172,13 +172,12 @@
         {
             var testServer = TestServer.Create(
                 builder => builder.MapSite("multisecure.example.com", RequestScheme.HttpsXForwardedProto | RequestScheme.Https,
-                    builder.BranchConfig(
-                        branch => branch.Use((context, _) =>
-                        {
-                            context.Response.StatusCode = 200;
-                            context.Response.ReasonPhrase = "OK";
-                            return Task.FromResult(0);
-                        }))));
+                   branch => branch.Use((context, _) =>
+                    {
+                        context.Response.StatusCode = 200;
+                        context.Response.ReasonPhrase = "OK";
+                        return Task.FromResult(0);
+                    })));
             HttpClient httpClient = testServer.HttpClient;
             httpClient.DefaultRequestHeaders.Add("X-Forwarded-Proto", "https");
 
@@ -191,13 +190,13 @@
         public async Task When_multisecure_site_is_mapped_on_http_with_x_forward_proto_header_then_should_get_forbidden()
         {
             var testServer = TestServer.Create(
-                builder => builder.MapSite("multisecure.example.com", builder.BranchConfig(
+                builder => builder.MapSite("multisecure.example.com",
                     branch => branch.Use((context, _) =>
                     {
                         context.Response.StatusCode = 403;
                         context.Response.ReasonPhrase = "Forbidden";
                         return Task.FromResult(0);
-                    }))));
+                    })));
             HttpClient httpClient = testServer.HttpClient;
             httpClient.DefaultRequestHeaders.Add("X-Forwarded-Proto", "http");
 
