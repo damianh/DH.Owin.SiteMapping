@@ -1,22 +1,24 @@
 ﻿<?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
-        <id>Owin.SiteMapping</id>
+        <id>SiteMappingMiddleware</id>
         <version>0.0.0.0</version>
         <authors>Damian Hickey</authors>
         <owners>Damian Hickey</owners>
-        <projectUrl>https://github.com/damianh/Owin.SiteMapping</projectUrl>
+        <projectUrl>https://github.com/damianh/SiteMappingMiddleware</projectUrl>
+		<licenseUrl>https://github.com/damianh/SiteMappingMiddleware/blob/master/LICENSE</licenseUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <title>Owin.SiteMapping</title>
+        <title>SiteMappingMiddleware</title>
         <description>OWIN Middleware that provides functionality similar to IIS Site Bindings allowing you to partition your OWIN application by host header and port number.</description>
         <tags>owin, middleware</tags>
         <frameworkAssemblies/>
         <releaseNotes>
             Removal of dependency on Owin.dll
+            Renamed from Owin.SiteMapping to SiteMappingMiddleware
         </releaseNotes>
     </metadata>
     <files>
-        <file src="bin\Owin.SiteMapping\net40\Owin.SiteMapping.dll" target="lib\net40" />
-        <file src="bin\Owin.SiteMapping\net40\Owin.SiteMapping.xml" target="lib\net40" />
+        <file src="bin\Release\SiteMappingMiddlewaredll" target="lib\net40" />
+        <file src="bin\Release\SiteMappingMiddleware.xml" target="lib\net40" />
     </files>
 </package>
