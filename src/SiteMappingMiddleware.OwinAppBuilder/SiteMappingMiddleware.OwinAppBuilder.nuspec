@@ -15,8 +15,8 @@
         <tags>owin, middleware, sites</tags>
         <frameworkAssemblies />
         <dependencies>
-            <dependency id="SiteMappingMiddleware" version="(2.0,3.0]"/>
-            <dependency id="Owin" version="(1.0,2.0]"/>
+            <dependency id="SiteMappingMiddleware" version="[2.0,3.0)"/>
+            <dependency id="Owin" version="[1.0,2.0)"/>
         </dependencies>
         <releaseNotes>
         </releaseNotes>
