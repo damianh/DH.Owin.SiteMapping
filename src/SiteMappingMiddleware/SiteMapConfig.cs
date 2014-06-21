@@ -1,4 +1,4 @@
-﻿namespace Owin.SiteMapping
+﻿namespace SiteMappingMiddleware
 {
     using System;
 

@@ -1,17 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{757A5ABF-F560-416D-8494-C7A2C6F8E1EF}</ProjectGuid>
+    <ProjectGuid>{035BA0C2-E7E1-4541-9D44-CB3E62A971AA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SiteMappingMiddleware</RootNamespace>
-    <AssemblyName>SiteMappingMiddleware</AssemblyName>
+    <RootNamespace>Owin</RootNamespace>
+    <AssemblyName>SiteMapppingMiddleware.OwinAppBuilder</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,7 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\SiteMappingMiddleware.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\SiteMapppingMiddleware.OwinAppBuilder.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,34 +29,31 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\SiteMappingMiddleware.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\SiteMapppingMiddleware.OwinAppBuilder.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Owin, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net40\Microsoft.Owin.dll</HintPath>
-    </Reference>
-    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="AppBuilderExtensions.cs" />
     <Compile Include="Guard.cs" />
-    <Compile Include="RequestScheme.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SiteMapConfig.cs" />
-    <Compile Include="SiteMapMiddleware.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="SiteMappingMiddleware.nuspec" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SiteMappingMiddleware\SiteMappingMiddleware.csproj">
+      <Project>{757A5ABF-F560-416D-8494-C7A2C6F8E1EF}</Project>
+      <Name>SiteMappingMiddleware</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

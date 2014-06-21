@@ -77,6 +77,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SiteMappingMiddleware.OwinAppBuilder\SiteMappingMiddleware.OwinAppBuilder.csproj">
+      <Project>{035ba0c2-e7e1-4541-9d44-cb3e62a971aa}</Project>
+      <Name>SiteMappingMiddleware.OwinAppBuilder</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SiteMappingMiddleware\SiteMappingMiddleware.csproj">
       <Project>{757a5abf-f560-416d-8494-c7a2c6f8e1ef}</Project>
       <Name>SiteMappingMiddleware</Name>

@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Owin.SiteMapping
+﻿namespace SiteMappingMiddleware
 {
+    using System;
+
     [Flags]
     public enum RequestScheme
     {
