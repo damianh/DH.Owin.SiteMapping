@@ -2,7 +2,7 @@
 
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Damian Hickey")]
-[assembly: AssemblyProduct("Owin.SiteMapping")]
+[assembly: AssemblyProduct("SiteMappingMiddleware")]
 [assembly: AssemblyCopyright("Copyright © Damian Hickey 2013-2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
