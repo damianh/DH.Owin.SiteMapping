@@ -1,0 +1,28 @@
+﻿<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>SiteMappingMiddleware.OwinAppBuilder</id>
+        <version>0.0.0.0</version>
+        <authors>Damian Hickey</authors>
+        <owners>Damian Hickey</owners>
+        <projectUrl>https://github.com/damianh/SiteMappingMiddleware</projectUrl>
+        <licenseUrl>https://github.com/damianh/SiteMappingMiddleware/blob/master/LICENSE</licenseUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <title>Site Mapping Middleware AppBuilder Integration</title>
+        <description>
+            Integration package for the Limits middleware for users of the (now deprecated) IAppBuilder.
+        </description>
+        <tags>owin, middleware, sites</tags>
+        <frameworkAssemblies />
+        <dependencies>
+            <dependency id="SiteMappingMiddleware" version="(2.0,3.0]"/>
+            <dependency id="Owin" version="(1.0,2.0]"/>
+        </dependencies>
+        <releaseNotes>
+        </releaseNotes>
+    </metadata>
+    <files>
+        <file src="bin\Release\SiteMappingMiddleware.OwinAppBuilder.dll" target="lib\net45" />
+        <file src="bin\Release\SiteMappingMiddleware.OwinAppBuilder.xml" target="lib\net45" />
+    </files>
+</package>
