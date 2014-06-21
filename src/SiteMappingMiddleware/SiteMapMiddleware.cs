@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using Microsoft.Owin;
 
     using AppFunc = System.Func<System.Collections.Generic.IDictionary<string, object>, System.Threading.Tasks.Task>;
     using MidFunc = System.Func<
@@ -22,7 +21,10 @@
     /// </summary>
     public static class SiteMapMiddleware
     {
-        private const string OwinRequestHeadersKey = "owin.RequestHeaders"
+        private const string OwinRequestHeadersKey = "owin.RequestHeaders";
+        private const string OwinRequestSchemeKey = "owin.RequestScheme";
+        private const string XForwardedProtoHeaderKey = "X-Forwarded-Proto";
+        private const string HostHeaderKey = "Host";
 
         /// <summary>
         /// Maps the site.
@@ -36,26 +38,31 @@
         {
             siteMapConfigs.MustNotBeNull("siteMapConfigs");
             branch.MustNotBeNull("branch");
-            var siteMapsHashSet = new HashSet<SiteMapConfig>(siteMapConfigs);
 
+            var siteMapsHashSet = new HashSet<SiteMapConfig>(siteMapConfigs);
             return
                 next =>
                 env =>
                 {
-                    var request = new OwinRequest(env);
-
+                    var headers = env.Get<IDictionary<string, string[]>>(OwinRequestHeadersKey);
+                    var host = headers[HostHeaderKey][0];
+                    var scheme = env.Get<string>(OwinRequestSchemeKey);
                     //If the headers have a X-Forwarded-Proto header then the request has been mapped through
                     //a load balancer or reverse proxy and the initial scheme is contained in the header value.
-                    string scheme = string.Equals(request.Headers["X-Forwarded-Proto"], "https",
-                        StringComparison.InvariantCultureIgnoreCase)
-                        ? "HttpsXForwardedProto"
-                        : request.Scheme;
-
+                    string[] headerValues;
+                    if (headers.TryGetValue(XForwardedProtoHeaderKey, out headerValues))
+                    {
+                        string headerValue = headerValues[0];
+                        if (string.Equals(headerValue, "https", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            scheme = "HttpsXForwardedProto";
+                        }
+                    }
                     var requestScheme = (RequestScheme)Enum.Parse(typeof(RequestScheme), scheme, true);
-                    var siteMap = new SiteMapConfig(request.Host.Value, requestScheme);
+                    var siteMap = new SiteMapConfig(host, requestScheme);
                     return siteMapsHashSet.Contains(siteMap)
-                        ? branch(request.Environment)
-                        : next(request.Environment);
+                        ? branch(env)
+                        : next(env);
                 };
         }
 
