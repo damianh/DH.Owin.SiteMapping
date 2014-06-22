@@ -19,7 +19,7 @@
     /// <summary>
     /// 
     /// </summary>
-    public static class SiteMapMiddleware
+    public static class SiteMapping
     {
         private const string OwinRequestHeadersKey = "owin.RequestHeaders";
         private const string OwinRequestSchemeKey = "owin.RequestScheme";
@@ -34,12 +34,12 @@
         /// <returns>A middleware func.</returns>
         /// <exception cref="System.ArgumentNullException">siteMapConfigs</exception>
         /// <exception cref="System.ArgumentNullException">branch</exception>
-        public static MidFunc MapSite(IEnumerable<SiteMapConfig> siteMapConfigs, AppFunc branch)
+        public static MidFunc MapSite(IEnumerable<MapSiteConfig> siteMapConfigs, AppFunc branch)
         {
             siteMapConfigs.MustNotBeNull("siteMapConfigs");
             branch.MustNotBeNull("branch");
 
-            var siteMapsHashSet = new HashSet<SiteMapConfig>(siteMapConfigs);
+            var siteMapsHashSet = new HashSet<MapSiteConfig>(siteMapConfigs);
             return
                 next =>
                 env =>
@@ -59,7 +59,7 @@
                         }
                     }
                     var requestScheme = (RequestScheme)Enum.Parse(typeof(RequestScheme), scheme, true);
-                    var siteMap = new SiteMapConfig(host, requestScheme);
+                    var siteMap = new MapSiteConfig(host, requestScheme);
                     return siteMapsHashSet.Contains(siteMap)
                         ? branch(env)
                         : next(env);
@@ -82,7 +82,7 @@
             hostname.MustNotBeNullOrWhitespace("hostname");
             branch.MustNotBeNull("branch");
 
-            return MapSite(builder, new[] {new SiteMapConfig(hostname)}, branch);
+            return MapSite(builder, new[] {new MapSiteConfig(hostname)}, branch);
         }
 
         /// <summary>
@@ -102,26 +102,26 @@
             hostname.MustNotBeNullOrWhitespace("hostname");
             branch.MustNotBeNull("branch");
 
-            return MapSite(builder, new SiteMapConfig(hostname, requestScheme), branch);
+            return MapSite(builder, new MapSiteConfig(hostname, requestScheme), branch);
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="builder"></param>
-        /// <param name="siteMapConfig"></param>
+        /// <param name="mapSiteConfig"></param>
         /// <param name="branch"></param>
         /// <returns></returns>
         /// <exception cref="System.ArgumentNullException">builder</exception>
-        /// <exception cref="System.ArgumentNullException">siteMapConfig</exception>
+        /// <exception cref="System.ArgumentNullException">MapSiteConfig</exception>
         /// <exception cref="System.ArgumentNullException">branch</exception>
-        public static BuildFunc MapSite(this BuildFunc builder, SiteMapConfig siteMapConfig, AppFunc branch)
+        public static BuildFunc MapSite(this BuildFunc builder, MapSiteConfig mapSiteConfig, AppFunc branch)
         {
             builder.MustNotBeNull("builder");
-            siteMapConfig.MustNotBeNull("siteMapConfig");
+            mapSiteConfig.MustNotBeNull("MapSiteConfig");
             branch.MustNotBeNull("branch");
 
-            return MapSite(builder, new[] {siteMapConfig}, branch);
+            return MapSite(builder, new[] {mapSiteConfig}, branch);
         }
 
         /// <summary>
@@ -134,7 +134,7 @@
         /// <exception cref="System.ArgumentNullException">builder</exception>
         /// <exception cref="System.ArgumentNullException">siteMapConfigs</exception>
         /// <exception cref="System.ArgumentNullException">branch</exception>
-        public static BuildFunc MapSite(this BuildFunc builder, IEnumerable<SiteMapConfig> siteMapConfigs, AppFunc branch)
+        public static BuildFunc MapSite(this BuildFunc builder, IEnumerable<MapSiteConfig> siteMapConfigs, AppFunc branch)
         {
             builder.MustNotBeNull("builder");
             siteMapConfigs.MustNotBeNull("siteMapConfigs");

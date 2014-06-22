@@ -39,7 +39,7 @@
 
             builder
                 .UseOwin()
-                .MapSite(new[] {new SiteMapConfig(hostname)}, branch);
+                .MapSite(new[] {new MapSiteConfig(hostname)}, branch);
             return builder;
         }
 
@@ -59,7 +59,7 @@
             hostname.MustNotBeNullOrWhitespace("hostname");
             branch.MustNotBeNull("branch");
 
-            return MapSite(builder, new[] { new SiteMapConfig(hostname) }, builder.BranchConfig(branch));
+            return MapSite(builder, new[] { new MapSiteConfig(hostname) }, builder.BranchConfig(branch));
         }
 
         /// <summary>
@@ -109,21 +109,21 @@
         /// 
         /// </summary>
         /// <param name="builder"></param>
-        /// <param name="siteMapConfig"></param>
+        /// <param name="mapSiteConfig"></param>
         /// <param name="branch"></param>
         /// <returns></returns>
         /// <exception cref="System.ArgumentNullException">builder</exception>
-        /// <exception cref="System.ArgumentNullException">siteMapConfig</exception>
+        /// <exception cref="System.ArgumentNullException">MapSiteConfig</exception>
         /// <exception cref="System.ArgumentNullException">branch</exception>
-        public static IAppBuilder MapSite(this IAppBuilder builder, SiteMapConfig siteMapConfig, AppFunc branch)
+        public static IAppBuilder MapSite(this IAppBuilder builder, MapSiteConfig mapSiteConfig, AppFunc branch)
         {
             builder.MustNotBeNull("builder");
-            siteMapConfig.MustNotBeNull("siteMapConfig");
+            mapSiteConfig.MustNotBeNull("MapSiteConfig");
             branch.MustNotBeNull("branch");
 
             builder
                .UseOwin()
-               .MapSite(siteMapConfig, branch);
+               .MapSite(mapSiteConfig, branch);
             return builder;
         }
 
@@ -131,19 +131,19 @@
         /// 
         /// </summary>
         /// <param name="builder"></param>
-        /// <param name="siteMapConfig"></param>
+        /// <param name="mapSiteConfig"></param>
         /// <param name="branch"></param>
         /// <returns></returns>
         /// <exception cref="System.ArgumentNullException">builder</exception>
-        /// <exception cref="System.ArgumentNullException">siteMapConfig</exception>
+        /// <exception cref="System.ArgumentNullException">MapSiteConfig</exception>
         /// <exception cref="System.ArgumentNullException">branch</exception>
-        public static IAppBuilder MapSite(this IAppBuilder builder, SiteMapConfig siteMapConfig, Action<IAppBuilder> branch)
+        public static IAppBuilder MapSite(this IAppBuilder builder, MapSiteConfig mapSiteConfig, Action<IAppBuilder> branch)
         {
             builder.MustNotBeNull("builder");
-            siteMapConfig.MustNotBeNull("siteMapConfig");
+            mapSiteConfig.MustNotBeNull("MapSiteConfig");
             branch.MustNotBeNull("branch");
 
-            return MapSite(builder, siteMapConfig, builder.BranchConfig(branch));
+            return MapSite(builder, mapSiteConfig, builder.BranchConfig(branch));
         }
 
         /// <summary>
@@ -156,7 +156,7 @@
         /// <exception cref="System.ArgumentNullException">builder</exception>
         /// <exception cref="System.ArgumentNullException">siteMapConfigs</exception>
         /// <exception cref="System.ArgumentNullException">branch</exception>
-        public static IAppBuilder MapSite(this IAppBuilder builder, IEnumerable<SiteMapConfig> siteMapConfigs, AppFunc branch)
+        public static IAppBuilder MapSite(this IAppBuilder builder, IEnumerable<MapSiteConfig> siteMapConfigs, AppFunc branch)
         {
             builder.MustNotBeNull("builder");
             siteMapConfigs.MustNotBeNull("siteMapConfigs");
@@ -178,7 +178,7 @@
         /// <exception cref="System.ArgumentNullException">builder</exception>
         /// <exception cref="System.ArgumentNullException">siteMapConfigs</exception>
         /// <exception cref="System.ArgumentNullException">branch</exception>
-        public static IAppBuilder MapSite(this IAppBuilder builder, IEnumerable<SiteMapConfig> siteMapConfigs, Action<IAppBuilder> branch)
+        public static IAppBuilder MapSite(this IAppBuilder builder, IEnumerable<MapSiteConfig> siteMapConfigs, Action<IAppBuilder> branch)
         {
             builder.MustNotBeNull("builder");
             siteMapConfigs.MustNotBeNull("siteMapConfigs");

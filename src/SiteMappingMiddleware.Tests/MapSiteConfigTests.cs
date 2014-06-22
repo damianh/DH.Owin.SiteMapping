@@ -3,17 +3,17 @@
     using FluentAssertions;
     using Xunit;
 
-    public class SiteMapConfigTests
+    public class MapSiteConfigTests
     {
-        private readonly SiteMapConfig _config1;
-        private readonly SiteMapConfig _sameAsConfig1;
-        private readonly SiteMapConfig _differentToConfig1;
+        private readonly MapSiteConfig _config1;
+        private readonly MapSiteConfig _sameAsConfig1;
+        private readonly MapSiteConfig _differentToConfig1;
 
-        public SiteMapConfigTests()
+        public MapSiteConfigTests()
         {
-            _config1 = new SiteMapConfig("host1");
-            _sameAsConfig1 = new SiteMapConfig("host1");
-            _differentToConfig1 = new SiteMapConfig("host2");
+            _config1 = new MapSiteConfig("host1");
+            _sameAsConfig1 = new MapSiteConfig("host1");
+            _differentToConfig1 = new MapSiteConfig("host2");
         }
 
 

@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class SiteMapConfig : IEquatable<SiteMapConfig>
+    public class MapSiteConfig : IEquatable<MapSiteConfig>
     {
         private readonly string _hostName;
         private readonly RequestScheme _requestScheme;
@@ -16,7 +16,7 @@
         /// </param>
         /// <param name="requestScheme">The request scheme this site responds too.</param>
         /// <exception cref="ArgumentException"></exception>
-        public SiteMapConfig(string hostName, RequestScheme requestScheme = RequestScheme.Http)
+        public MapSiteConfig(string hostName, RequestScheme requestScheme = RequestScheme.Http)
         {
             if (string.IsNullOrWhiteSpace(hostName))
             {
@@ -30,7 +30,7 @@
             _hostName = hostName;
         }
 
-        public bool Equals(SiteMapConfig other)
+        public bool Equals(MapSiteConfig other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
@@ -41,7 +41,7 @@
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            return obj.GetType() == GetType() && Equals((SiteMapConfig)obj);
+            return obj.GetType() == GetType() && Equals((MapSiteConfig)obj);
         }
 
         public override int GetHashCode()
@@ -54,12 +54,12 @@
             }
         }
 
-        public static bool operator ==(SiteMapConfig left, SiteMapConfig right)
+        public static bool operator ==(MapSiteConfig left, MapSiteConfig right)
         {
             return Equals(left, right);
         }
 
-        public static bool operator !=(SiteMapConfig left, SiteMapConfig right)
+        public static bool operator !=(MapSiteConfig left, MapSiteConfig right)
         {
             return !Equals(left, right);
         }

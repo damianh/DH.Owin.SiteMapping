@@ -14,7 +14,7 @@
         public async Task Can_map_site_with_SiteMapConfig_and_IAppBuilder_branch()
         {
             var testServer = TestServer.Create(
-                builder => builder.MapSite(new SiteMapConfig("example.com"),
+                builder => builder.MapSite(new MapSiteConfig("example.com"),
                     branch => branch.Use((context, _) =>
                     {
                         context.Response.StatusCode = 200;
@@ -32,7 +32,7 @@
         public async Task Can_map_site_with_SiteMapConfigs_and_IAppBuilder_branch()
         {
             var testServer = TestServer.Create(
-                builder => builder.MapSite(new [] { new SiteMapConfig("site1.example.com"), new SiteMapConfig("site2.example.com")},
+                builder => builder.MapSite(new [] { new MapSiteConfig("site1.example.com"), new MapSiteConfig("site2.example.com")},
                     branch => branch.Use((context, _) =>
                     {
                         context.Response.StatusCode = 200;

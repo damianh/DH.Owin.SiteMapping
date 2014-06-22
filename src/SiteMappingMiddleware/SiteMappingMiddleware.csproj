@@ -44,8 +44,8 @@
     <Compile Include="Guard.cs" />
     <Compile Include="RequestScheme.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SiteMapConfig.cs" />
-    <Compile Include="SiteMapMiddleware.cs" />
+    <Compile Include="MapSiteConfig.cs" />
+    <Compile Include="SiteMapping.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SiteMappingMiddleware.nuspec" />
